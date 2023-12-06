@@ -323,6 +323,30 @@ public final class SecuritiesTable implements ModificationListener
         new BooleanEditingSupport(Security.class, "retired").addListener(this).attachTo(column); //$NON-NLS-1$
         column.setVisible(false);
         support.addColumn(column);
+
+        column = new Column("9", Messages.ColumnNavOffset, SWT.LEFT, 40); //$NON-NLS-1$
+        column.setLabelProvider(new ColumnLabelProvider()
+        {
+            @Override
+            public String getText(Object e)
+            {
+                return ""; //$NON-NLS-1$
+            }
+
+            @Override
+            public Image getImage(Object e)
+            {
+                return ((Security) e).isNavOffset() ? Images.CHECK.image() : null;
+            }
+        });
+        // lookup security field by string, and uppercasing first letter (to do
+        // get... camelcase)
+        // so failed because Offset is uppercase.
+        column.setSorter(ColumnViewerSorter.create(Security.class, "navOffset")); //$NON-NLS-1$
+        // also fails here
+        new BooleanEditingSupport(Security.class, "navOffset").addListener(this).attachTo(column); //$NON-NLS-1$
+        column.setVisible(false);
+        support.addColumn(column);
     }
 
     private void addColumnLatestPrice() // NOSONAR

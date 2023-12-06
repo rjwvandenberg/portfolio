@@ -75,6 +75,7 @@ public final class Security implements Attributable, InvestmentVehicle
     private List<SecurityProperty> properties;
 
     private boolean isRetired = false;
+    private boolean isNavOffset = false;
 
     private Instant updatedAt;
 
@@ -609,6 +610,17 @@ public final class Security implements Attributable, InvestmentVehicle
         this.updatedAt = Instant.now();
     }
 
+    public boolean isNavOffset()
+    {
+        return isNavOffset;
+    }
+
+    public void setNavOffset(boolean isNavOffset)
+    {
+        this.isNavOffset = isNavOffset;
+        this.updatedAt = Instant.now();
+    }
+
     public List<SecurityEvent> getEvents()
     {
         if (this.events == null)
@@ -861,6 +873,7 @@ public final class Security implements Attributable, InvestmentVehicle
             answer.properties = new ArrayList<>(properties);
 
         answer.isRetired = isRetired;
+        answer.isNavOffset = isNavOffset;
 
         answer.updatedAt = updatedAt;
 
